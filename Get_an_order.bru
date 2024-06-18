@@ -1,0 +1,27 @@
+meta {
+  name: Get_an_order
+  type: http
+  seq: 7
+}
+
+get {
+  url: https://simple-books-api.glitch.me/orders/{{orderId}}
+  body: json
+  auth: bearer
+}
+
+body:json {
+  {
+    "customerName": "John"
+  }
+}
+
+script:pre-request {
+  req.setHeader("Authorization", "Bearer {{access_token}}")
+}
+
+tests {
+  test('verify quantity is greater than 0', ()=>{
+    expect(res.body.quantity).to.be.gt(0)
+  })
+}

@@ -1,0 +1,25 @@
+meta {
+  name: Update_an_order
+  type: http
+  seq: 8
+}
+
+patch {
+  url: https://simple-books-api.glitch.me/orders/{{orderId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+tests {
+  test('verify status is 204', ()=>{
+    expect(res.getStatus()).to.be.eq(204)
+  })
+  
+  test('verify status string is "No Content"', ()=>{
+    expect(res.statusText).to.be.eq("No Content")
+  })
+}

@@ -1,0 +1,25 @@
+meta {
+  name: Get_all_orders
+  type: http
+  seq: 6
+}
+
+get {
+  url: https://simple-books-api.glitch.me/orders
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+tests {
+  test('verify status is 200', ()=>{
+    expect(res.getStatus()).to.be.eq(200)
+  })
+  
+  test('verify status string is "OK"', ()=>{
+    expect(res.statusText).to.be.eq("OK")
+  })
+}

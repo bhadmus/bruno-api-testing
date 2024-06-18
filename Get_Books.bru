@@ -1,0 +1,17 @@
+meta {
+  name: Get_Books
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://simple-books-api.glitch.me/books
+  body: none
+  auth: none
+}
+
+tests {
+  test('verify response is a non-empty list', ()=>{
+    expect((res.body).length).to.gte(5)
+  })
+}

@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "API-Training-First-API-Test",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

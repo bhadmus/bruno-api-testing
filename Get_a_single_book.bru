@@ -1,0 +1,20 @@
+meta {
+  name: Get_a_single_book
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://simple-books-api.glitch.me/books/1
+  body: none
+  auth: none
+}
+
+tests {
+  test('verify the book is available', ()=>{
+    expect(res.body.available).to.be.true
+  }) 
+  test('verify the type is fiction', ()=>{
+    expect(res.body.type).to.be.eq("fiction")
+  })
+}

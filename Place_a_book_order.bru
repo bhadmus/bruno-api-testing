@@ -1,0 +1,72 @@
+meta {
+  name: Place_a_book_order
+  type: http
+  seq: 5
+}
+
+post {
+  url: https://simple-books-api.glitch.me/orders
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+body:json {
+  {
+    "bookId": 1,
+    "customerName": "John"
+  }
+}
+
+script:post-response {
+  var id = res.body.orderId
+  
+  bru.setVar('orderId',id)
+}
+
+tests {
+  var resp = res.getBody()
+  var order_no = resp.orderId
+  
+  bru.setVar("orderId", order_no)
+  test("Response status code is 201", function () {
+      expect(res.getStatus()).to.equal(201);
+  });
+  
+  
+  test("Response has the required fields - created and orderId", function () {
+      const responseData = res.getBody();
+      
+      expect(responseData).to.be.an('object');
+      expect(responseData).to.have.property('created');
+      expect(responseData).to.have.property('orderId');
+  });
+  
+  
+  test("OrderId is a non-empty string", function () {
+    const responseData = res.getBody();
+    
+    expect(responseData.orderId).to.be.a('string').and.to.have.lengthOf.at.least(1, "OrderId should be a non-empty string");
+  });
+  
+  
+  test("Order ID should be a non-empty string", function () {
+    const responseData = res.getBody();
+  
+    expect(responseData).to.be.an('object');
+    expect(responseData.orderId).to.be.a('string').and.to.have.lengthOf.at.least(1, "Order ID should be a non-empty string");
+  });
+  
+  
+  test("Verify that the 'created' field is a boolean value", function () {
+    const responseData = res.getBody();
+    
+    expect(responseData).to.be.an('object');
+    expect(responseData.created).to.be.a('boolean');
+  });
+  
+  
+}
