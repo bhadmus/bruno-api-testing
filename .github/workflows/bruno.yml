@@ -5,8 +5,9 @@ on: [push]
 jobs:
   run-test:
     runs-on: ubuntu-latest
+
   steps:
-  - name: SetUp Pipeline
+  - name: Checkout
     uses: actions/checkout@v4
 
   - name: Select Node Version  
