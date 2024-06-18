@@ -1,0 +1,24 @@
+name: Bru API Test
+
+on: [push]
+
+jobs:
+  run-test:
+  runs-on: ubuntu-latest
+  steps:
+  - name: SetUp Pipeline
+    uses: actions/checkout@v4
+
+  - name: Select Node Version  
+    uses: actions/setup-node@v3
+    with:
+      node-version-file: '.nvmrc'
+
+  - name: Install Bru CLI
+    run: npm install -g @usebruno/cli
+
+  - name: Run tests
+        run: |
+          cd environments
+          bru run  
+         
